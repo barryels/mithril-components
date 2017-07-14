@@ -18,7 +18,7 @@ var css = {
 	background: 'transparent',
 	border: 0,
 	color: 'inherit',
-	cursor: 'default',
+	cursor: 'pointer',
 	display: 'block',
 	font: 'inherit',
 	lineHeight: 'normal',
@@ -30,6 +30,10 @@ var css = {
 	'&::-moz-focus-inner': {
 		border: 0,
 		padding: 0
+	},
+
+	'&:disabled': {
+		cursor: 'not-allowed'
 	}
 };
 
