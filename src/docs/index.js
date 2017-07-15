@@ -26,11 +26,13 @@ function buildRoutes() {
 	var Home = require('./screens/Home');
 	var ComponentButton = require('./screens/ComponentButton');
 	var ComponentGrid = require('./screens/ComponentGrid');
+	var ComponentCheckbox = require('./screens/ComponentCheckbox');
 
 	return {
 		'/': buildRoute(Home),
 		'/component/Button': buildRoute(ComponentButton),
-		'/component/Grid': buildRoute(ComponentGrid)
+		'/component/Grid': buildRoute(ComponentGrid),
+		'/component/Checkbox': buildRoute(ComponentCheckbox)
 	};
 }
 

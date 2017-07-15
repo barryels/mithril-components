@@ -2,14 +2,14 @@
 
 
 var m = require('mithril');
-var domain = require('./../../domain');
+var domainStore = require('./../../domain/store');
 var CSSManager = require('./../../../components/utils').CSSManager;
 
 
 var name = 'docs_AppSection';
 var className = '.' + name;
 var css = {
-	paddingTop: domain.store.AppHeader().height + 'px'
+	paddingTop: domainStore.AppHeader().height + 'px'
 };
 
 

@@ -40,6 +40,7 @@
     "mkdirp": "^0.5.1",
     "npm-build-tools": "^2.2.5",
     "npm-run-all": "^4.0.2",
+    "phantomjs": "^2.1.7",
     "watchify": "^3.9.0"
   }
 }

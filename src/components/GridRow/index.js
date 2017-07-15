@@ -8,7 +8,17 @@ var CSSManager = require('./../utils').CSSManager;
 var name = 'GridRow';
 var className = '.' + name;
 var css = {
-	border: '1px solid #0f0'
+	marginLeft: '-15px',
+	marginRight: '-15px',
+
+	'&:before, &:after': {
+		content: '" "',
+		display: 'table'
+	},
+
+	'&:after': {
+		clear: 'both'
+	}
 };
 
 
@@ -16,8 +26,7 @@ CSSManager.addComponentHeadStyle(className, css);
 
 
 function view(vnode) {
-	return m(className, {
-	}, vnode.children);
+	return m(className, vnode.children);
 }
 
 

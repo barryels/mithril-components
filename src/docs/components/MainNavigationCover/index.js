@@ -2,7 +2,8 @@
 
 
 var m = require('mithril');
-var domain = require('./../../domain');
+var domainActions = require('./../../domain/actions');
+var domainStore = require('./../../domain/store');
 var CSSManager = require('./../../../components/utils').CSSManager;
 
 
@@ -25,11 +26,11 @@ CSSManager.addComponentHeadStyle(className, css);
 function view() {
 	var style = {};
 
-	if (!domain.store.isMainNavigationShowing()) {
+	if (!domainStore.isMainNavigationShowing()) {
 		style.display = 'none';
 	}
 
-	return m(className, { style: style, onclick: domain.actions.toggleMainNavigationDisplay.bind(null) });
+	return m(className, { style: style, onclick: domainActions.toggleMainNavigationDisplay.bind(null) });
 }
 
 module.exports = {
