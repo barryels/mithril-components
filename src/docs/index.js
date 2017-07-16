@@ -17,7 +17,7 @@ function buildRoute(screen, layout) {
 	return {
 		render: function () {
 			return m(layout, m(screen));
-		}
+		},
 	};
 }
 
@@ -27,16 +27,18 @@ function buildRoutes() {
 	var ComponentButton = require('./screens/ComponentButton');
 	var ComponentGrid = require('./screens/ComponentGrid');
 	var ComponentCheckbox = require('./screens/ComponentCheckbox');
+	var ComponentProgressBar = require('./screens/ComponentProgressBar');
 
 	return {
 		'/': buildRoute(Home),
 		'/component/Button': buildRoute(ComponentButton),
 		'/component/Grid': buildRoute(ComponentGrid),
-		'/component/Checkbox': buildRoute(ComponentCheckbox)
+		'/component/Checkbox': buildRoute(ComponentCheckbox),
+		'/component/ProgressBar': buildRoute(ComponentProgressBar),
 	};
 }
 
 
 module.exports = {
-	init: init
+	init: init,
 };

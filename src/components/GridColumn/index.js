@@ -11,14 +11,16 @@ var types = {};
 var cssMediaQueries = {
 	'_768': '@media (min-width: 768px)',
 	'_992': '@media (min-width: 992px)',
-	'_1200': '@media (min-width: 1200px)'
+	'_1200': '@media (min-width: 1200px)',
 };
 var css = {
 	boxSizing: 'border-box',
+	float: 'none',
 	position: 'relative',
 	minHeight: '1px',
 	paddingLeft: '15px',
-	paddingRight: '15px'
+	paddingRight: '15px',
+	width: '100%',
 };
 
 
@@ -45,17 +47,29 @@ function init() {
 		columnNumber = i + 1;
 
 		width = 100 * (columnNumber / 12) + '%';
-
 		console.log(columnNumber, width);
 
 		for (j = 0; j < breakpoints.length; j++) {
 			currentBreakpoint = breakpoints[j];
 			types[currentBreakpoint + String(columnNumber)] = '--' + currentBreakpoint + '-' + columnNumber;
 
-			_css['&--' + currentBreakpoint + '-' + columnNumber] = {
-				float: 'left',
-				width: width,
-			};
+			switch (currentBreakpoint) {
+				case 'xs':
+					_css['&--' + currentBreakpoint + '-' + columnNumber] = {
+						float: 'left',
+						width: width,
+					};
+					break;
+
+				case 'sm':
+					var test = {};
+					test['&--' + currentBreakpoint + '-' + columnNumber] = {
+						float: 'left',
+						width: width,
+					};
+					css[cssMediaQueries._768] = test;
+					break;
+			}
 
 			// Add push, pull, offset
 		}
@@ -91,5 +105,5 @@ init();
 module.exports = {
 	types: types,
 	className: className,
-	view: view
+	view: view,
 };

@@ -5,7 +5,7 @@ var CSSManager = require('./../../../components/utils').CSSManager;
 
 var config = {
 	base_unit: 8,
-	base_font_size: 14
+	base_font_size: 14,
 };
 
 
@@ -22,8 +22,8 @@ function initGlobalStyling() {
 			color: '#555',
 			fontFamily: 'Arial, sans-serif',
 			fontSize: config.base_font_size + 'px',
-			margin: 0
-		}
+			margin: 0,
+		},
 	});
 
 }
@@ -35,6 +35,7 @@ function initComponentStyling() {
 	var GridRow = require('./../../../components/GridRow');
 	var GridColumn = require('./../../../components/GridColumn');
 	var Checkbox = require('./../../../components/Checkbox');
+	var ProgressBar = require('./../../../components/ProgressBar');
 
 	CSSManager.updateComponentHeadStyle(Button.className, {
 		background: '#fff',
@@ -43,24 +44,24 @@ function initComponentStyling() {
 
 		':disabled': {
 			background: '#eee',
-			color: '#ccc'
-		}
+			color: '#ccc',
+		},
 	});
 
 
 	CSSManager.updateComponentHeadStyle(GridContainer.className, {
-		background: 'rgba(255,0,0,0.3)'
+		background: 'rgba(255,0,0,0.3)',
 	});
 
 	CSSManager.updateComponentHeadStyle(GridRow.className, {
-		background: 'rgba(0,255,0,0.3)'
+		background: 'rgba(0,255,0,0.3)',
 	});
 
 	CSSManager.updateComponentHeadStyle(GridColumn.className, {
 		background: 'rgba(0,0,255,0.3)',
 		border: '1px solid #f00',
 		padding: '10px',
-		textAlign: 'center'
+		textAlign: 'center',
 	});
 
 	CSSManager.updateComponentHeadStyle(Checkbox.className, {
@@ -75,9 +76,19 @@ function initComponentStyling() {
 		},
 	});
 
+	var ProgressBarStyle = {
+		height: config.base_unit * 4 + 'px',
+		marginBottom: config.base_unit * 2 + 'px',
+
+		'&__Foreground': {
+			height: config.base_unit * 4 + 'px',
+		},
+	};
+	CSSManager.updateComponentHeadStyle(ProgressBar.className, ProgressBarStyle);
+
 }
 
 
 module.exports = {
-	init: init
+	init: init,
 };

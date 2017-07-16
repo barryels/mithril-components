@@ -9,58 +9,70 @@ var CSSManager = require('./../../../components/utils').CSSManager;
 
 var name = 'docs_MainNavigation';
 var className = '.' + name;
-var css = {
-	background: '#f5f5f5',
-	height: '100%',
-	left: 0,
-	position: 'fixed',
-	top: 0,
-	width: '320px',
-	zIndex: 3
-};
 
 
-CSSManager.addComponentHeadStyle(className, css);
+function construct() {
+	var css = {
+		background: '#f5f5f5',
+		height: '100%',
+		left: 0,
+		position: 'fixed',
+		top: 0,
+		width: '320px',
+		zIndex: 3,
+	};
+
+	CSSManager.addComponentHeadStyle(className, css);
+}
+
+
+function onWindowHashChange() {
+	domainActions.hideMainNavigation();
+}
+
+
+function oninit() {
+	window.addEventListener('hashchange', onWindowHashChange);
+	onWindowHashChange();
+}
+
+
+function onbeforeremove() {
+	window.removeEventListener('hashchange', onWindowHashChange);
+}
 
 
 function view() {
-	var style = {};
+	var style = {},
+		routesObject = domainStore.routes(),
+		routePropName = '',
+		routesList = [];
 
 	if (!domainStore.isMainNavigationShowing()) {
 		style.display = 'none';
 	}
 
+	for (routePropName in routesObject) {
+		routesList.push({ route: routePropName, title: routesObject[routePropName].title });
+	}
+
+
 	return m(className, { style: style }, [
 		m('button', { onclick: domainActions.toggleMainNavigationDisplay.bind(null) }, 'X'),
-		m('ul', [
-			m('li', m('a', { href: '#!/' }, 'Home')),
-			m('li', m('a', { href: '#!/component/Grid' }, 'Grid')),
-			m('li', m('a', { href: '#!/component/Button' }, 'Button')),
-			m('li', m('a', { href: '#!/component/TextField' }, 'TextField')),
-			m('li', m('a', { href: '#!/component/RadioGroup' }, 'RadioGroup')),
-			m('li', m('a', { href: '#!/component/Tabs' }, 'Tabs')),
-			m('li', m('a', { href: '#!/component/Checkbox' }, 'Checkbox')),
-			m('li', m('a', { href: '#!/component/Toggle' }, 'Toggle')),
-			m('li', m('a', { href: '#!/component/Select' }, 'Select')),
-			m('li', m('a', { href: '#!/component/ProgressBar' }, 'ProgressBar')),
-			m('li', m('a', { href: '#!/component/Accordion' }, 'Accordion')),
-			m('li', m('a', { href: '#!/component/Carousel' }, 'Carousel')),
-			m('li', m('a', { href: '#!/component/DateInput' }, 'DateInput')),
-			m('li', m('a', { href: '#!/component/Pagination' }, 'Pagination')),
-			m('li', m('a', { href: '#!/component/Breadcrumbs' }, 'Breadcrumbs')),
-			m('li', m('a', { href: '#!/component/TagList' }, 'TagList')),
-			m('li', m('a', { href: '#!/component/Slider' }, 'Slider')),
-			m('li', m('a', { href: '#!/component/Icon' }, 'Icon')),
-			m('li', m('a', { href: '#!/component/Tooltip' }, 'Tooltip')),
-			m('li', m('a', { href: '#!/component/Snackbar' }, 'Snackbar')),
-			m('li', m('a', { href: '#!/component/Dialog' }, 'Dialog')),
-			m('li', m('a', { href: '#!/component/Panel' }, 'Panel')),
-			m('li', m('a', { href: '#!/component/ListGroup' }, 'ListGroup')),
-			m('li', m('a', { href: '#!/component/Embed' }, 'Embed'))
-		])
+		m('ul',
+			routesList.map(function (routeListItem) {
+				return m('li', m('a', { href: '#!' + routeListItem.route }, routeListItem.title));
+			})
+		),
 	]);
 }
 
+
+construct();
+
+
 module.exports = {
-	view: view
+	oninit: oninit,
+	onbeforeremove: onbeforeremove,
+	view: view,
 };

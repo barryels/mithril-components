@@ -26,6 +26,10 @@
 			2,
 			"always"
 		],
+		"comma-dangle": [
+			2,
+			"always-multiline"
+		],
 		"max-params": [
 			2,
 			4

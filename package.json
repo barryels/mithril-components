@@ -6,11 +6,15 @@
   "scripts": {
     "dist_dir-clean": "n-clean dist",
     "dist_dir-create": "mkdirp dist",
-    "ui-server": "http-server dist -p 3000",
+    "ui-server": "node ./tools/ui-server.js",
     "copy_static_files": "cpx \"src/**/*.{html,css,svg,png,jpg,gif,woff,eot,ttf,txt,json}\" ./dist",
     "copy_static_files-watch": "n-run -w src 'npm run copy_static_files'",
-    "docs-js_build-watch": "watchify src/index.js --debug -o dist/docs/bundle.js",
+    "docs-js_build": "browserify src/index.js --debug -o dist/docs/bundle.js",
+    "docs-js_build-watch": "watchify src/index.js -o dist/docs/bundle.js",
+    "docs-js_build-prod": "browserify src/index.js | uglifyjs -c > dist/docs/bundle.js",
     "dev": "npm-run-all --serial dist_dir-clean dist_dir-create copy_static_files && npm-run-all --parallel ui-server copy_static_files-watch docs-js_build-watch",
+    "prod": "npm-run-all --serial dist_dir-clean dist_dir-create copy_static_files docs-js_build",
+    "deploy": "npm run docs-js_build-prod && surge ./dist mithril-components.surge.sh",
     "start": "npm install && npm run dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -34,13 +38,18 @@
   },
   "devDependencies": {
     "browserify": "^14.4.0",
+    "compression": "^1.7.0",
     "cpx": "^1.5.0",
     "eslint": "^4.2.0",
+    "express": "^4.15.3",
     "http-server": "^0.10.0",
     "mkdirp": "^0.5.1",
     "npm-build-tools": "^2.2.5",
     "npm-run-all": "^4.0.2",
     "phantomjs": "^2.1.7",
+    "surge": "^0.19.0",
+    "uglifyify": "^4.0.2",
+    "uglifyjs": "^2.4.11",
     "watchify": "^3.9.0"
   }
 }
