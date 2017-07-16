@@ -9,18 +9,17 @@ var name = 'GridColumn';
 var className = '.' + name;
 var types = {};
 var cssMediaQueries = {
-	'_768': '@media (min-width: 768px)',
-	'_992': '@media (min-width: 992px)',
-	'_1200': '@media (min-width: 1200px)',
+	_0: '@media (min-width: 0px)',
+	_768: '@media (min-width: 768px)',
+	_992: '@media (min-width: 992px)',
+	_1200: '@media (min-width: 1200px)',
 };
 var css = {
 	boxSizing: 'border-box',
-	float: 'none',
 	position: 'relative',
 	minHeight: '1px',
 	paddingLeft: '15px',
 	paddingRight: '15px',
-	width: '100%',
 };
 
 
@@ -32,42 +31,59 @@ function init() {
 	var currentBreakpoint;
 	var _css = {};
 
-	css[cssMediaQueries._768] = {
-		// float: 'left',
-	};
-	css[cssMediaQueries._992] = {
-		// float: 'left',
-	};
-	css[cssMediaQueries._1200] = {
-		// float: 'left',
-	};
+	_css[cssMediaQueries._0] = {};
+	_css[cssMediaQueries._768] = {};
+	_css[cssMediaQueries._992] = {};
+	_css[cssMediaQueries._1200] = {};
+
+	var allColumns_xs_string = '';
+	var allColumns_sm_string = '';
+	var allColumns_md_string = '';
+	var allColumns_lg_string = '';
 
 	for (i = 0; i < columns; i++) {
 		var width = 0;
 		columnNumber = i + 1;
 
 		width = 100 * (columnNumber / 12) + '%';
-		console.log(columnNumber, width);
+		// console.log(columnNumber, width);
 
 		for (j = 0; j < breakpoints.length; j++) {
 			currentBreakpoint = breakpoints[j];
 			types[currentBreakpoint + String(columnNumber)] = '--' + currentBreakpoint + '-' + columnNumber;
 
+			// console.log(currentBreakpoint, columnNumber);
+
 			switch (currentBreakpoint) {
 				case 'xs':
-					_css['&--' + currentBreakpoint + '-' + columnNumber] = {
-						float: 'left',
+					allColumns_xs_string += '&--' + currentBreakpoint + '-' + columnNumber + ', ';
+					// _css['&--' + currentBreakpoint + '-' + columnNumber] = {
+					// 	width: width,
+					// };
+					_css[cssMediaQueries._0]['&--' + currentBreakpoint + '-' + columnNumber] = {
 						width: width,
 					};
 					break;
 
 				case 'sm':
-					var test = {};
-					test['&--' + currentBreakpoint + '-' + columnNumber] = {
-						float: 'left',
+					allColumns_sm_string += '&--' + currentBreakpoint + '-' + columnNumber + ', ';
+					_css[cssMediaQueries._768]['&--' + currentBreakpoint + '-' + columnNumber] = {
 						width: width,
 					};
-					css[cssMediaQueries._768] = test;
+					break;
+
+				case 'md':
+					allColumns_md_string += '&--' + currentBreakpoint + '-' + columnNumber + ', ';
+					_css[cssMediaQueries._992]['&--' + currentBreakpoint + '-' + columnNumber] = {
+						width: width,
+					};
+					break;
+
+				case 'lg':
+					allColumns_lg_string += '&--' + currentBreakpoint + '-' + columnNumber + ', ';
+					_css[cssMediaQueries._1200]['&--' + currentBreakpoint + '-' + columnNumber] = {
+						width: width,
+					};
 					break;
 			}
 
@@ -76,7 +92,32 @@ function init() {
 
 	}
 
-	console.log(types);
+	// Remove trailing commas
+	allColumns_xs_string = allColumns_xs_string.substr(0, allColumns_xs_string.length - 2);
+	allColumns_sm_string = allColumns_sm_string.substr(0, allColumns_sm_string.length - 2);
+	allColumns_md_string = allColumns_md_string.substr(0, allColumns_md_string.length - 2);
+	allColumns_lg_string = allColumns_lg_string.substr(0, allColumns_lg_string.length - 2);
+
+	_css[allColumns_xs_string] = {
+		float: 'left',
+	};
+
+	_css[cssMediaQueries._768][allColumns_sm_string] = {
+		float: 'left',
+	};
+
+	_css[cssMediaQueries._992][allColumns_md_string] = {
+		float: 'left',
+	};
+
+	_css[cssMediaQueries._1200][allColumns_lg_string] = {
+		float: 'left',
+	};
+
+	console.log(allColumns_xs_string);
+	// console.log(types);
+
+	console.log(_css);
 
 	css[className] = _css;
 

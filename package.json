@@ -10,7 +10,7 @@
     "copy_static_files": "cpx \"src/**/*.{html,css,svg,png,jpg,gif,woff,eot,ttf,txt,json}\" ./dist",
     "copy_static_files-watch": "n-run -w src 'npm run copy_static_files'",
     "docs-js_build": "browserify src/index.js --debug -o dist/docs/bundle.js",
-    "docs-js_build-watch": "watchify src/index.js -o dist/docs/bundle.js",
+    "docs-js_build-watch": "watchify src/index.js --debug -o dist/docs/bundle.js",
     "docs-js_build-prod": "browserify src/index.js | uglifyjs -c > dist/docs/bundle.js",
     "dev": "npm-run-all --serial dist_dir-clean dist_dir-create copy_static_files && npm-run-all --parallel ui-server copy_static_files-watch docs-js_build-watch",
     "prod": "npm-run-all --serial dist_dir-clean dist_dir-create copy_static_files docs-js_build",

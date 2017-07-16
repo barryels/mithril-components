@@ -55,6 +55,7 @@ function initComponentStyling() {
 
 	CSSManager.updateComponentHeadStyle(GridRow.className, {
 		background: 'rgba(0,255,0,0.3)',
+		marginBottom: '10px',
 	});
 
 	CSSManager.updateComponentHeadStyle(GridColumn.className, {
