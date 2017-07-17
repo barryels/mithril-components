@@ -56,14 +56,14 @@ function getHeadStyleById(id) {
 
 function addGlobalHeadStyle(id, css, doUpdateExisting) {
 	addHeadStyle(id, {
-		'@global': css
+		'@global': css,
 	}, doUpdateExisting);
 }
 
 
 function addComponentHeadStyle(id, css, doUpdateExisting) {
 	var _css = {
-		'@global': {}
+		'@global': {},
 	};
 	_css['@global'][id] = css;
 
@@ -73,18 +73,6 @@ function addComponentHeadStyle(id, css, doUpdateExisting) {
 
 function updateComponentHeadStyle(id, css) {
 	addComponentHeadStyle(id, css, true);
-}
-
-
-function addHTMLLinkTag(href) {
-	var head = getHTMLHead();
-
-	var l = document.createElement('link');
-
-	l.setAttribute('rel', 'stylesheet');
-	l.setAttribute('href', href);
-
-	head.appendChild(l);
 }
 
 
@@ -110,5 +98,4 @@ module.exports = {
 	addGlobalHeadStyle: addGlobalHeadStyle,
 	addComponentHeadStyle: addComponentHeadStyle,
 	updateComponentHeadStyle: updateComponentHeadStyle,
-	addHTMLLinkTag: addHTMLLinkTag
 };

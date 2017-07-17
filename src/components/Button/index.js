@@ -29,16 +29,28 @@ var css = {
 
 	'&::-moz-focus-inner': {
 		border: 0,
-		padding: 0
+		padding: 0,
 	},
 
 	'&:disabled': {
-		cursor: 'not-allowed'
-	}
+		cursor: 'not-allowed',
+	},
 };
 
 
 CSSManager.addComponentHeadStyle(className, css);
+
+
+var theme = {
+	base: function (style) {
+		CSSManager.updateComponentHeadStyle(className, style);
+	},
+	disabled: function (style) {
+		CSSManager.updateComponentHeadStyle(className, {
+			'&:disabled': style,
+		});
+	},
+};
 
 
 function view(vnode) {
@@ -60,6 +72,7 @@ function view(vnode) {
 
 
 module.exports = {
+	theme: theme,
 	className: className,
-	view: view
+	view: view,
 };

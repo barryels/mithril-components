@@ -37,15 +37,16 @@ function initComponentStyling() {
 	var Checkbox = require('./../../../components/Checkbox');
 	var ProgressBar = require('./../../../components/ProgressBar');
 
-	CSSManager.updateComponentHeadStyle(Button.className, {
+
+	Button.theme.base({
 		background: '#fff',
 		border: '1px solid #ccc',
 		padding: config.base_unit + 'px',
+	});
 
-		':disabled': {
-			background: '#eee',
-			color: '#ccc',
-		},
+	Button.theme.disabled({
+		background: '#eee',
+		color: '#ccc',
 	});
 
 
