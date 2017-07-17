@@ -11,15 +11,13 @@ var className = '.' + name;
 
 var css = {
 	background: 'transparent',
-	position: 'relative',
 
 	'&__Item': {
 		background: '#fff',
 		boxSizing: 'border-box',
-		color: '#555',
+		color: '#000',
 		display: 'inline-block',
-		padding: '16px',
-		position: 'relative',
+		padding: 0,
 		textAlign: 'center',
 		textDecoration: 'none',
 
