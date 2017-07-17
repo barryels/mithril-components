@@ -54,7 +54,7 @@ var theme = {
 
 
 function getLabel(vnode) {
-	var label = '',
+	var label = m.trust('&nbsp;'),
 		label = vnode.children.length > 0 ? vnode.children : label,
 		label = vnode.attrs.label ? vnode.attrs.label : label;
 
