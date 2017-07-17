@@ -42,6 +42,11 @@ function initComponentStyling() {
 		background: '#fff',
 		border: '1px solid #ccc',
 		padding: config.base_unit + 'px',
+
+		'&:hover': {
+			background: '#ccc',
+			color: '#000',
+		},
 	});
 
 	Button.theme.disabled({

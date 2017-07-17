@@ -53,26 +53,30 @@ var theme = {
 };
 
 
+function getLabel(vnode) {
+	var label = '',
+		label = vnode.children.length > 0 ? vnode.children : label,
+		label = vnode.attrs.label ? vnode.attrs.label : label;
+
+	return label;
+}
+
+
 function view(vnode) {
 	var style = vnode.attrs.style || {},
-		label = 'Button',
 		onclick = vnode.attrs.onclick ? vnode.attrs.onclick : null,
 		role = vnode.attrs.role ? vnode.attrs.role : 'button';
-
-	label = vnode.children.length > 0 ? vnode.children : label;
-	label = vnode.attrs.label ? vnode.attrs.label : label;
 
 	return m('button' + className, {
 		style: style,
 		onclick: onclick,
 		role: role,
-		disabled: vnode.attrs.disabled
-	}, label);
+		disabled: vnode.attrs.disabled,
+	}, getLabel(vnode));
 }
 
 
 module.exports = {
 	theme: theme,
-	className: className,
 	view: view,
 };
