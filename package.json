@@ -2,7 +2,7 @@
   "name": "mithril-components",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/components/index.js",
   "scripts": {
     "dist_dir-clean": "n-clean dist",
     "dist_dir-create": "mkdirp dist",
