@@ -28,6 +28,7 @@ function buildRoutes() {
 	var ComponentGrid = require('./screens/ComponentGrid');
 	var ComponentCheckbox = require('./screens/ComponentCheckbox');
 	var ComponentProgressBar = require('./screens/ComponentProgressBar');
+	var ComponentTabs = require('./screens/ComponentTabs');
 
 	return {
 		'/': buildRoute(Home),
@@ -35,6 +36,7 @@ function buildRoutes() {
 		'/component/Grid': buildRoute(ComponentGrid),
 		'/component/Checkbox': buildRoute(ComponentCheckbox),
 		'/component/ProgressBar': buildRoute(ComponentProgressBar),
+		'/component/Tabs': buildRoute(ComponentTabs),
 	};
 }
 
