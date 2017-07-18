@@ -45,8 +45,8 @@ function buildRoutes() {
 	var routes = {};
 	var propName;
 
-	for (propName in domain.store.routes()) {
-		var route = domain.store.routes()[propName];
+	for (propName in domain.query.routes()) {
+		var route = domain.query.routes()[propName];
 		routes[propName] = buildRoute(getScreenForRoute(propName, route));
 	}
 

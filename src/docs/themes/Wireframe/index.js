@@ -36,6 +36,7 @@ function initComponentStyling() {
 	var GridColumn = require('./../../../components/GridColumn');
 	var Checkbox = require('./../../../components/Checkbox');
 	var ProgressBar = require('./../../../components/ProgressBar');
+	var TextInput = require('./../../../components/TextInput');
 
 
 	Button.theme.base({
@@ -52,6 +53,24 @@ function initComponentStyling() {
 	Button.theme.disabled({
 		background: '#eee',
 		color: '#ccc',
+	});
+
+
+	TextInput.theme.base({
+		marginBottom: config.base_unit * 2 + 'px',
+	});
+	TextInput.theme.label({
+		display: 'block',
+		marginBottom: config.base_unit + 'px',
+		paddingLeft: config.base_unit + 'px',
+	});
+	TextInput.theme.input({
+		borderBottom: '2px solid #ccc',
+		display: 'block',
+		padding: config.base_unit + 'px',
+	});
+	TextInput.theme.hasErrorsInput({
+		borderBottomColor: '#c00',
 	});
 
 

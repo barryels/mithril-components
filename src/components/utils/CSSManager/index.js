@@ -91,14 +91,20 @@ function generateCSSFromJS(js) {
 }
 
 
-function uniqueClassName(name) {
+function uniqueDOMClassAttribute(name) {
+	return name + String(Math.round(Math.random() * 1000000));
+}
+
+
+function uniqueDOMidAttribute(name) {
 	return name + String(Math.round(Math.random() * 1000000));
 }
 
 
 module.exports = {
 	name: name,
-	uniqueClassName: uniqueClassName,
+	uniqueDOMClassAttribute: uniqueDOMClassAttribute,
+	uniqueDOMidAttribute: uniqueDOMidAttribute,
 	generateCSSFromJS: generateCSSFromJS,
 	addHeadStyle: addHeadStyle,
 	addGlobalHeadStyle: addGlobalHeadStyle,

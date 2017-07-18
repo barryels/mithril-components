@@ -1,7 +1,7 @@
 'use strict';
 
 
-var state = require('./state');
+var state;
 
 
 function routes() {
@@ -19,8 +19,12 @@ function AppHeader() {
 };
 
 
-module.exports = {
-	routes: routes,
-	isMainNavigationShowing: isMainNavigationShowing,
-	AppHeader: AppHeader
+module.exports = function (_state) {
+	state = _state;
+
+	return {
+		routes: routes,
+		isMainNavigationShowing: isMainNavigationShowing,
+		AppHeader: AppHeader,
+	};
 };

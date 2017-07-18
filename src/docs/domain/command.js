@@ -2,13 +2,11 @@
 
 
 var mobx = require('mobx');
-var state = require('./state');
+var state;
 
 
 console.log(mobx);
 
-
-// ACTIONS
 function toggleMainNavigationDisplay() {
 	if (state.isMainNavigationShowing) {
 		hideMainNavigation();
@@ -28,8 +26,12 @@ function hideMainNavigation() {
 };
 
 
-module.exports = {
-	toggleMainNavigationDisplay: toggleMainNavigationDisplay,
-	showMainNavigation: showMainNavigation,
-	hideMainNavigation: hideMainNavigation,
+module.exports = function (_state) {
+	state = _state;
+
+	return {
+		toggleMainNavigationDisplay: toggleMainNavigationDisplay,
+		showMainNavigation: showMainNavigation,
+		hideMainNavigation: hideMainNavigation,
+	};
 };

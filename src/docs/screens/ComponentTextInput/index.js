@@ -18,7 +18,15 @@ function view() {
 		m('h1', 'TextInput'),
 		m(TextInput),
 		m(TextInput, { value: value }),
+		m(TextInput, { id: 'the-id', value: value }),
 		m(TextInput, { value: value, oninput: updateValue.bind(null) }),
+		m(TextInput, {
+			value: value,
+			oninput: updateValue.bind(null),
+			errors: [
+				{ label: 'Has one error' },
+			],
+		}),
 		m('pre', JSON.stringify(value, '', 2)),
 	]);
 }
