@@ -3,6 +3,8 @@
 
 var CSSManager = require('./../../../components/utils').CSSManager;
 
+
+var name = 'ThemeWireframe';
 var config = {
 	base_unit: 8,
 	base_font_size: 14,
@@ -16,10 +18,10 @@ function init() {
 
 
 function initGlobalStyling() {
-	CSSManager.addGlobalHeadStyle('theme', {
+	CSSManager.addGlobalHeadStyle(name, {
 		'html, body': {
 			background: '#fff',
-			color: '#555',
+			color: '#222',
 			fontFamily: 'Arial, sans-serif',
 			fontSize: config.base_font_size + 'px',
 			margin: 0,
@@ -31,17 +33,20 @@ function initGlobalStyling() {
 
 function initComponentStyling() {
 	var Button = require('./../../../components/Button');
+	var Checkbox = require('./../../../components/Checkbox');
 	var GridContainer = require('./../../../components/GridContainer');
 	var GridRow = require('./../../../components/GridRow');
 	var GridColumn = require('./../../../components/GridColumn');
-	var Checkbox = require('./../../../components/Checkbox');
-	var ProgressBar = require('./../../../components/ProgressBar');
+	var List = require('./../../../components/List');
+	var ProgressIndicator = require('./../../../components/ProgressIndicator');
 	var TextInput = require('./../../../components/TextInput');
 
 
 	Button.theme.base({
 		background: '#fff',
 		border: '1px solid #ccc',
+		boxShadow: '0 2px 0 2px rgba(0,0,0,0.75)',
+		marginBottom: config.base_unit + 'px',
 		padding: config.base_unit + 'px',
 
 		'&:hover': {
@@ -80,6 +85,19 @@ function initComponentStyling() {
 	});
 
 
+	List.theme.item({
+		background: '#ccc',
+		borderBottom: '2px solid #f00',
+		padding: (config.base_unit * 2) + 'px',
+	});
+	List.theme.itemFirst({
+		background: '#000',
+	});
+	List.theme.itemLast({
+		borderBottom: '0',
+	});
+
+
 	CSSManager.updateComponentHeadStyle(GridContainer.className, {
 		background: 'rgba(255,0,0,0.3)',
 	});
@@ -108,7 +126,7 @@ function initComponentStyling() {
 		},
 	});
 
-	var ProgressBarStyle = {
+	var ProgressIndicatorStyle = {
 		height: config.base_unit * 4 + 'px',
 		marginBottom: config.base_unit * 2 + 'px',
 
@@ -116,7 +134,7 @@ function initComponentStyling() {
 			height: config.base_unit * 4 + 'px',
 		},
 	};
-	CSSManager.updateComponentHeadStyle(ProgressBar.className, ProgressBarStyle);
+	CSSManager.updateComponentHeadStyle(ProgressIndicator.className, ProgressIndicatorStyle);
 
 }
 

@@ -7,7 +7,8 @@ module.exports = {
 	ComponentButton: require('./ComponentButton'),
 	ComponentGrid: require('./ComponentGrid'),
 	ComponentCheckbox: require('./ComponentCheckbox'),
-	ComponentProgressBar: require('./ComponentProgressBar'),
+	ComponentList: require('./ComponentList'),
+	ComponentProgressIndicator: require('./ComponentProgressIndicator'),
 	ComponentTabs: require('./ComponentTabs'),
 	ComponentTextInput: require('./ComponentTextInput'),
 };

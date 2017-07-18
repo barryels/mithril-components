@@ -5,6 +5,7 @@ var m = require('mithril');
 var domainCommands = require('./../../domain').command;
 var domainQuery = require('./../../domain').query;
 var CSSManager = require('./../../../components/utils').CSSManager;
+var List = require('./../../../components/List');
 
 
 var name = 'docs_MainNavigation';
@@ -23,6 +24,19 @@ function construct() {
 		transform: 'perspective(0) translate3d(-300px, 0, 0)',
 		transition: '.3s ease all',
 
+		'&__header': {
+			padding: '20px',
+		},
+
+		'&__section': {
+			height: '100%',
+			overflow: 'scroll',
+		},
+
+		'&__footer': {
+			padding: '20px',
+		},
+
 		'&--showing': {
 			transform: 'perspective(0) translate3d(0, 0, 0)',
 		},
@@ -33,6 +47,7 @@ function construct() {
 
 
 function onWindowHashChange() {
+	console.warn('onWindowHashChange()', window.location);
 	domainCommands.hideMainNavigation();
 }
 
@@ -56,8 +71,6 @@ function view() {
 		route = null,
 		classNameModifier = className;
 
-	console.log(domainQuery.isMainNavigationShowing());
-
 	if (domainQuery.isMainNavigationShowing()) {
 		classNameModifier += '--showing';
 	}
@@ -71,12 +84,19 @@ function view() {
 	}
 
 	return m(className + classNameModifier, { style: style }, [
-		m('button', { onclick: domainCommands.toggleMainNavigationDisplay.bind(null) }, 'X'),
-		m('ul',
-			routesList.map(function (routeListItem) {
-				return m('li', m('a', { href: '#!' + routeListItem.route }, routeListItem.title));
-			})
-		),
+		m(className + '__header', [
+			m('button', { onclick: domainCommands.toggleMainNavigationDisplay.bind(null) }, 'X'),
+		]),
+		m(className + '__section', [
+			m(List, {
+				items: routesList.map(function (routeListItem) {
+					return { label: routeListItem.title, hash: '#!' + routeListItem.route };
+				}),
+			}),
+		]),
+		m(className + '__footer', [
+			m('span', 'Footer'),
+		]),
 	]);
 }
 

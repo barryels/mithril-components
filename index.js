@@ -7,6 +7,6 @@ module.exports = {
 	GridColumn: require('./src/components/GridColumn'),
 	GridContainer: require('./src/components/GridContainer'),
 	GridRow: require('./src/components/Button'),
-	ProgressBar: require('./src/components/ProgressBar'),
+	ProgressIndicator: require('./src/components/ProgressIndicator'),
 	Tabs: require('./src/components/Tabs'),
 };

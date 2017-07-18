@@ -114,10 +114,7 @@ function init() {
 		float: 'left',
 	};
 
-	console.log(allColumns_xs_string);
-	// console.log(types);
-
-	console.log(_css);
+	// console.log(_css);
 
 	css[className] = _css;
 

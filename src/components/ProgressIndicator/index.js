@@ -5,8 +5,19 @@ var m = require('mithril');
 var CSSManager = require('./../utils').CSSManager;
 
 
-var name = 'ProgressBar';
-var className = '.' + name;
+var name = 'ProgressIndicator';
+var className = '.' + CSSManager.uniqueDOMClassAttribute(name);
+var types = {
+	linear: {
+		type: 'linear',
+	},
+	circular: {
+		type: 'circular',
+	},
+	text: {
+		type: 'text',
+	},
+};
 var css = {
 	background: '#ccc',
 	boxSizing: 'border-box',
@@ -47,6 +58,7 @@ function view(vnode) {
 
 
 module.exports = {
+	types: types,
 	className: className,
 	view: view,
 };

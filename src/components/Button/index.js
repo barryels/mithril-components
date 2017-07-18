@@ -6,7 +6,26 @@ var CSSManager = require('./../utils').CSSManager;
 
 
 var name = 'Button';
-var className = '.' + name;
+var className = '.' + CSSManager.uniqueDOMClassAttribute(name);
+var types = {
+	default: {
+		role: 'button',
+		type: 'button',
+	},
+	submit: {
+		role: 'button',
+		type: 'submit',
+	},
+	reset: {
+		role: 'button',
+		type: 'reset',
+	},
+};
+var components = {
+	disabled: className + ':disabled',
+};
+
+
 var css = {
 	_webkitAppearance: 'button', /* for input */
 	_webkitUserSelect: 'none', /* for button */
@@ -63,20 +82,23 @@ function getLabel(vnode) {
 
 
 function view(vnode) {
-	var style = vnode.attrs.style || {},
-		onclick = vnode.attrs.onclick ? vnode.attrs.onclick : null,
-		role = vnode.attrs.role ? vnode.attrs.role : 'button';
+	var type = vnode.attrs.type || types.default,
+		style = vnode.attrs.style || {},
+		onclick = vnode.attrs.onclick ? vnode.attrs.onclick : null;
 
 	return m('button' + className, {
+		type: type.type,
 		style: style,
 		onclick: onclick,
-		role: role,
+		role: type.role,
 		disabled: vnode.attrs.disabled,
 	}, getLabel(vnode));
 }
 
 
 module.exports = {
+	components: components,
 	theme: theme,
+	types: types,
 	view: view,
 };
