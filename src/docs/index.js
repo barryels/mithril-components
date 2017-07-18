@@ -2,6 +2,7 @@
 
 
 var m = require('mithril');
+var domain = require('./domain');
 require('./themes/Wireframe').init();
 
 
@@ -22,24 +23,34 @@ function buildRoute(screen, layout) {
 }
 
 
-function buildRoutes() {
-	var Home = require('./screens/Home');
-	var ComponentButton = require('./screens/ComponentButton');
-	var ComponentGrid = require('./screens/ComponentGrid');
-	var ComponentCheckbox = require('./screens/ComponentCheckbox');
-	var ComponentProgressBar = require('./screens/ComponentProgressBar');
-	var ComponentTabs = require('./screens/ComponentTabs');
-	var ComponentTextInput = require('./screens/ComponentTextInput');
+function getScreenForRoute(routePath, route) {
+	var Screens = require('./screens');
+	var Screen;
 
-	return {
-		'/': buildRoute(Home),
-		'/component/Button': buildRoute(ComponentButton),
-		'/component/Checkbox': buildRoute(ComponentCheckbox),
-		'/component/Grid': buildRoute(ComponentGrid),
-		'/component/ProgressBar': buildRoute(ComponentProgressBar),
-		'/component/Tabs': buildRoute(ComponentTabs),
-		'/component/TextInput': buildRoute(ComponentTextInput),
-	};
+	if (routePath.indexOf('/component/') === 0) {
+		Screen = Screens['Component' + route.name];
+	} else {
+		Screen = Screens[route.name];
+	}
+
+	if (!Screen) {
+		Screen = Screens.FourOhFour;
+	}
+
+	return Screen;
+}
+
+
+function buildRoutes() {
+	var routes = {};
+	var propName;
+
+	for (propName in domain.store.routes()) {
+		var route = domain.store.routes()[propName];
+		routes[propName] = buildRoute(getScreenForRoute(propName, route));
+	}
+
+	return routes;
 }
 
 

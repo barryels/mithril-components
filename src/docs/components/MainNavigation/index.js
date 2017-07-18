@@ -60,9 +60,8 @@ function view() {
 	}
 
 	for (routePropName in routesObject) {
-		routesList.push({ route: routePropName, title: routesObject[routePropName].title });
+		routesList.push({ route: routePropName, title: routesObject[routePropName].name });
 	}
-
 
 	return m(className + classNameModifier, { style: style }, [
 		m('button', { onclick: domainActions.toggleMainNavigationDisplay.bind(null) }, 'X'),
