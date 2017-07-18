@@ -20,6 +20,7 @@ var state = {
 		'/component/Accordion': { title: 'Accordion' },
 		'/component/Carousel': { title: 'Carousel' },
 		'/component/DateInput': { title: 'DateInput' },
+		'/component/SegmentedInput': { title: 'SegmentedInput' },
 		'/component/Pagination': { title: 'Pagination' },
 		'/component/Breadcrumbs': { title: 'Breadcrumbs' },
 		'/component/TagList': { title: 'TagList' },

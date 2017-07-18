@@ -36,9 +36,12 @@ var css = {
 	},
 
 	' .MenuButton': {
+		background: '#f00',
+		height: '100%',
 		position: 'relative',
+		width: '48px',
 		zIndex: 2,
-	}
+	},
 };
 
 

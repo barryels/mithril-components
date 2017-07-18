@@ -18,8 +18,14 @@ function construct() {
 		left: 0,
 		position: 'fixed',
 		top: 0,
-		width: '320px',
+		width: '300px',
 		zIndex: 3,
+		transform: 'perspective(0) translate3d(-300px, 0, 0)',
+		transition: '.3s ease all',
+
+		'&--showing': {
+			transform: 'perspective(0) translate3d(0, 0, 0)',
+		},
 	};
 
 	CSSManager.addComponentHeadStyle(className, css);
@@ -46,10 +52,11 @@ function view() {
 	var style = {},
 		routesObject = domainStore.routes(),
 		routePropName = '',
-		routesList = [];
+		routesList = [],
+		classNameModifier = className;
 
-	if (!domainStore.isMainNavigationShowing()) {
-		style.display = 'none';
+	if (domainStore.isMainNavigationShowing()) {
+		classNameModifier += '--showing';
 	}
 
 	for (routePropName in routesObject) {
@@ -57,7 +64,7 @@ function view() {
 	}
 
 
-	return m(className, { style: style }, [
+	return m(className + classNameModifier, { style: style }, [
 		m('button', { onclick: domainActions.toggleMainNavigationDisplay.bind(null) }, 'X'),
 		m('ul',
 			routesList.map(function (routeListItem) {
