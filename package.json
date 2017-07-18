@@ -44,6 +44,7 @@
     "express": "^4.15.3",
     "http-server": "^0.10.0",
     "mkdirp": "^0.5.1",
+    "mobx": "^3.2.1",
     "npm-build-tools": "^2.2.5",
     "npm-run-all": "^4.0.2",
     "phantomjs": "^2.1.7",

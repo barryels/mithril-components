@@ -1,6 +1,7 @@
 'use strict';
 
 
+var mobx = require('mobx');
 var state = require('./state');
 
 

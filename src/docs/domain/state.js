@@ -10,7 +10,7 @@ var state = {
 		'/': { title: 'Home' },
 		'/component/Grid': { title: 'Grid' },
 		'/component/Button': { title: 'Button' },
-		'/component/TextField': { title: 'TextField' },
+		'/component/TextInput': { title: 'TextInput' },
 		'/component/RadioGroup': { title: 'RadioGroup' },
 		'/component/Tabs': { title: 'Tabs' },
 		'/component/Checkbox': { title: 'Checkbox' },
@@ -31,7 +31,8 @@ var state = {
 		'/component/Dialog': { title: 'Dialog' },
 		'/component/Panel': { title: 'Panel' },
 		'/component/ListGroup': { title: 'ListGroup' },
-		'/component/Embed': { title: 'Embed' },
+		'/component/Media': { title: 'Media' },
+		'/component/Table': { title: 'Table' },
 	},
 };
 

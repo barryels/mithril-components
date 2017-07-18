@@ -5,7 +5,7 @@ var m = require('mithril');
 var CSSManager = require('./../utils').CSSManager;
 
 
-var name = '';
+var name = 'TextInput';
 var className = '.' + name;
 
 
@@ -19,8 +19,33 @@ function init() {
 }
 
 
+function setValue(vnode, v) {
+	console.log(vnode, v);
+	vnode.state.value = v;
+	vnode.attrs.value = v;
+}
+
+
+function oninput(vnode) {
+
+}
+
+
+function oninit(vnode) {
+	vnode.state = {
+		value: typeof vnode.attrs.value !== 'undefined' ? vnode.attrs.value : '',
+	};
+}
+
+
 function view(vnode) {
-	return m(className);
+
+	return m(className, [
+		m('input', {
+			oninput: m.withAttr('value', setValue.bind(null, vnode)),
+			value: vnode.state.value,
+		}),
+	]);
 }
 
 
@@ -28,5 +53,6 @@ init();
 
 
 module.exports = {
+	oninit: oninit,
 	view: view,
 };

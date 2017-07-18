@@ -29,14 +29,16 @@ function buildRoutes() {
 	var ComponentCheckbox = require('./screens/ComponentCheckbox');
 	var ComponentProgressBar = require('./screens/ComponentProgressBar');
 	var ComponentTabs = require('./screens/ComponentTabs');
+	var ComponentTextInput = require('./screens/ComponentTextInput');
 
 	return {
 		'/': buildRoute(Home),
 		'/component/Button': buildRoute(ComponentButton),
-		'/component/Grid': buildRoute(ComponentGrid),
 		'/component/Checkbox': buildRoute(ComponentCheckbox),
+		'/component/Grid': buildRoute(ComponentGrid),
 		'/component/ProgressBar': buildRoute(ComponentProgressBar),
 		'/component/Tabs': buildRoute(ComponentTabs),
+		'/component/TextInput': buildRoute(ComponentTextInput),
 	};
 }
 
