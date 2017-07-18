@@ -5,37 +5,51 @@ var m = require('mithril');
 
 
 var TextInput = require('./../../../components/TextInput');
-var value = 'asdf';
+
+
+var errors_sample1 = [
+	{ content: 'Has one error' },
+];
+var state = {
+	value: 'asdf1234',
+	errorsA: errors_sample1,
+	errorsB: errors_sample1,
+};
 
 
 function updateValue(v) {
-	value = v;
+	state.value = v;
+
+	state.errorsA = [];
 }
 
 
 function view() {
 	return m('div', [
 		m('h1', 'TextInput'),
+
 		m(TextInput),
-		m(TextInput, { value: value }),
-		m(TextInput, { id: 'the-id', value: value }),
-		m(TextInput, { value: value, oninput: updateValue.bind(null) }),
+
+		m(TextInput, { value: state.value }),
+
+		m(TextInput, { id: 'the-id', value: state.value }),
+
+		m(TextInput, { value: state.value, oninput: updateValue.bind(null) }),
+
 		m(TextInput, {
-			value: value,
+			value: state.value,
 			oninput: updateValue.bind(null),
-			errors: [
-				{ content: 'Has one error' },
-			],
+			errors: state.errors1,
 		}),
-		m(TextInput, { type: TextInput.types.multiline, value: value, oninput: updateValue.bind(null) }),
+
+		m(TextInput, { type: TextInput.types.multiline, value: state.value, oninput: updateValue.bind(null) }),
+
 		m(TextInput, {
-			value: value,
+			value: state.value,
 			type: TextInput.types.multiline,
-			errors: [
-				{ content: 'Has one error' },
-			],
+			errors: state.errors2,
 		}),
-		m('pre', JSON.stringify(value, '', 2)),
+		m('pre', JSON.stringify(state.value, '', 2)),
 	]);
 }
 

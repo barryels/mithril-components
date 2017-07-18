@@ -92,12 +92,12 @@ function generateCSSFromJS(js) {
 
 
 function uniqueDOMClassAttribute(name) {
-	return name + String(Math.round(Math.random() * 1000000));
+	return name + String(Math.round(Math.random() * 10000000));
 }
 
 
 function uniqueDOMidAttribute(name) {
-	return name + String(Math.round(Math.random() * 1000000));
+	return name + String(Math.round(Math.random() * 10000000));
 }
 
 
