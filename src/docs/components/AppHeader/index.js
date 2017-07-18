@@ -2,8 +2,8 @@
 
 
 var m = require('mithril');
-var domainActions = require('./../../domain/actions');
-var domainStore = require('./../../domain/store');
+var domainCommand = require('./../../domain').command;
+var domainQuery = require('./../../domain').query;
 var CSSManager = require('./../../../components/utils').CSSManager;
 
 
@@ -15,7 +15,7 @@ var className = '.' + name;
 var css = {
 	background: '#999',
 	color: '#555',
-	height: domainStore.AppHeader().height + 'px',
+	height: domainQuery.AppHeader().height + 'px',
 	left: 0,
 	position: 'fixed',
 	top: 0,
@@ -23,9 +23,9 @@ var css = {
 	zIndex: 1,
 
 	' .title': {
-		height: domainStore.AppHeader().height + 'px',
+		height: domainQuery.AppHeader().height + 'px',
 		left: 0,
-		lineHeight: domainStore.AppHeader().height + 'px',
+		lineHeight: domainQuery.AppHeader().height + 'px',
 		margin: '0 auto',
 		position: 'absolute',
 		textAlign: 'center',
@@ -52,7 +52,7 @@ function view() {
 	return m(className, [
 		m('.title', 'Mithril Components'),
 		// m(Button, { onclick: domainActions.toggleMainNavigationDisplay.bind(null) }, '='),
-		m('button.MenuButton', { onclick: domainActions.toggleMainNavigationDisplay.bind(null) }, '='),
+		m('button.MenuButton', { onclick: domainCommand.toggleMainNavigationDisplay.bind(null) }, '='),
 	]);
 }
 

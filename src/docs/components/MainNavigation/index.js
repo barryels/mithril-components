@@ -2,8 +2,8 @@
 
 
 var m = require('mithril');
-var domainActions = require('./../../domain/actions');
-var domainStore = require('./../../domain/store');
+var domainCommands = require('./../../domain').command;
+var domainQuery = require('./../../domain').query;
 var CSSManager = require('./../../../components/utils').CSSManager;
 
 
@@ -33,7 +33,7 @@ function construct() {
 
 
 function onWindowHashChange() {
-	domainActions.hideMainNavigation();
+	domainCommands.hideMainNavigation();
 }
 
 
@@ -50,21 +50,28 @@ function onbeforeremove() {
 
 function view() {
 	var style = {},
-		routesObject = domainStore.routes(),
+		routesObject = domainQuery.routes(),
 		routePropName = '',
 		routesList = [],
+		route = null,
 		classNameModifier = className;
 
-	if (domainStore.isMainNavigationShowing()) {
+	console.log(domainQuery.isMainNavigationShowing());
+
+	if (domainQuery.isMainNavigationShowing()) {
 		classNameModifier += '--showing';
 	}
 
 	for (routePropName in routesObject) {
-		routesList.push({ route: routePropName, title: routesObject[routePropName].name });
+		route = routesObject[routePropName];
+
+		if (typeof route.showInNav === 'undefined') {
+			routesList.push({ route: routePropName, title: route.name });
+		}
 	}
 
 	return m(className + classNameModifier, { style: style }, [
-		m('button', { onclick: domainActions.toggleMainNavigationDisplay.bind(null) }, 'X'),
+		m('button', { onclick: domainCommands.toggleMainNavigationDisplay.bind(null) }, 'X'),
 		m('ul',
 			routesList.map(function (routeListItem) {
 				return m('li', m('a', { href: '#!' + routeListItem.route }, routeListItem.title));

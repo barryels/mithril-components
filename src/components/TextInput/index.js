@@ -18,13 +18,15 @@ var types = {
 
 
 var css = {
-	' label': {
+	boxSizing: 'border-box',
+
+	'&__label': {
 		boxSizing: 'border-box',
 		margin: 0,
 		padding: 0,
 	},
 
-	' input, textarea': {
+	'&__input': {
 		border: '0',
 		boxSizing: 'border-box',
 		'*font-size': '100%', // to enable resizing for IE
@@ -36,6 +38,12 @@ var css = {
 		padding: 0,
 		width: '100%',
 	},
+
+	'&__errors': {
+		boxSizing: 'border-box',
+		margin: 0,
+		padding: 0,
+	},
 };
 
 var theme = {
@@ -44,19 +52,36 @@ var theme = {
 	},
 	label: function (style) {
 		CSSManager.updateComponentHeadStyle(className, {
-			' label': style,
+			'&__label': style,
 		});
 	},
 	input: function (style) {
 		CSSManager.updateComponentHeadStyle(className, {
-			' input, textarea': style,
+			'&__input, &__textarea': style,
+		});
+	},
+	hasErrorsLabel: function (style) {
+		var _style = {};
+		_style[' ' + className + '__label'] = style;
+
+		CSSManager.updateComponentHeadStyle(className, {
+			'&--has-errors': _style,
 		});
 	},
 	hasErrorsInput: function (style) {
+		var _style = {};
+		_style[' ' + className + '__input, ' + className + '__textarea'] = style;
+
 		CSSManager.updateComponentHeadStyle(className, {
-			'&--has-errors': {
-				' input, textarea': style,
-			},
+			'&--has-errors': _style,
+		});
+	},
+	errorMessages: function (style) {
+		var _style = {};
+		_style[' ' + className + '__errors'] = style;
+
+		CSSManager.updateComponentHeadStyle(className, {
+			'&--has-errors': _style,
 		});
 	},
 };
@@ -100,14 +125,17 @@ function view(vnode) {
 
 
 	return m(_className, [
-		m('label', {
+		m('label' + className + '__label', {
 			for: id,
 		}, 'Label'),
-		m(type.tagName, {
+		m(type.tagName + className + '__input', {
 			id: id,
 			oninput: m.withAttr('value', oninput.bind(null, vnode)),
 			value: vnode.state.value,
 		}),
+		m('ul' + className + '__errors', errors.map(function (error) {
+			return m('li', error.content);
+		})),
 	]);
 }
 

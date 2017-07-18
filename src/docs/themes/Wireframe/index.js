@@ -62,15 +62,21 @@ function initComponentStyling() {
 	TextInput.theme.label({
 		display: 'block',
 		marginBottom: config.base_unit + 'px',
-		paddingLeft: config.base_unit + 'px',
 	});
 	TextInput.theme.input({
 		borderBottom: '2px solid #ccc',
 		display: 'block',
-		padding: config.base_unit + 'px',
+		marginBottom: config.base_unit + 'px',
+		padding: config.base_unit + 'px 0',
+	});
+	TextInput.theme.hasErrorsLabel({
+		color: '#c00',
 	});
 	TextInput.theme.hasErrorsInput({
 		borderBottomColor: '#c00',
+	});
+	TextInput.theme.errorMessages({
+		color: '#c00',
 	});
 
 

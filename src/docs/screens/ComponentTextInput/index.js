@@ -24,10 +24,17 @@ function view() {
 			value: value,
 			oninput: updateValue.bind(null),
 			errors: [
-				{ label: 'Has one error' },
+				{ content: 'Has one error' },
 			],
 		}),
 		m(TextInput, { type: TextInput.types.multiline, value: value, oninput: updateValue.bind(null) }),
+		m(TextInput, {
+			value: value,
+			type: TextInput.types.multiline,
+			errors: [
+				{ content: 'Has one error' },
+			],
+		}),
 		m('pre', JSON.stringify(value, '', 2)),
 	]);
 }
