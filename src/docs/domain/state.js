@@ -28,7 +28,7 @@ var state = {
 		'/component/Slider': { name: 'Slider' },
 		'/component/Icon': { name: 'Icon' },
 		'/component/Tooltip': { name: 'Tooltip' },
-		'/component/Snackbar': { name: 'Snackbar' },
+		'/component/Notification': { name: 'Notification' },
 		'/component/Dialog': { name: 'Dialog' },
 		'/component/Panel': { name: 'Panel' },
 		'/component/ListGroup': { name: 'ListGroup' },
