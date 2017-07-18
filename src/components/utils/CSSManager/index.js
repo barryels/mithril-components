@@ -91,8 +91,14 @@ function generateCSSFromJS(js) {
 }
 
 
+function uniqueClassName(name) {
+	return name + String(Math.round(Math.random() * 1000000));
+}
+
+
 module.exports = {
 	name: name,
+	uniqueClassName: uniqueClassName,
 	generateCSSFromJS: generateCSSFromJS,
 	addHeadStyle: addHeadStyle,
 	addGlobalHeadStyle: addGlobalHeadStyle,

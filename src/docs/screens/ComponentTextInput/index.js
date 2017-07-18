@@ -7,7 +7,10 @@ var m = require('mithril');
 var TextInput = require('./../../../components/TextInput');
 var value = 'asdf';
 
-window.test = value;
+
+function updateValue(v) {
+	value = v;
+}
 
 
 function view() {
@@ -15,6 +18,7 @@ function view() {
 		m('h1', 'TextInput'),
 		m(TextInput),
 		m(TextInput, { value: value }),
+		m(TextInput, { value: value, oninput: updateValue.bind(null) }),
 		m('pre', JSON.stringify(value, '', 2)),
 	]);
 }

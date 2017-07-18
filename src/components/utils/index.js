@@ -7,5 +7,5 @@ var Polyfills = require('./Polyfills');
 
 module.exports = {
 	CSSManager: CSSManager,
-	Polyfills: Polyfills
+	Polyfills: Polyfills,
 };

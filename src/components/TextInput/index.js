@@ -6,11 +6,20 @@ var CSSManager = require('./../utils').CSSManager;
 
 
 var name = 'TextInput';
-var className = '.' + name;
+var className = '.' + CSSManager.uniqueClassName(name);
 
 
 var css = {
 
+	' input': {
+		border: '0',
+		'*font-size': '100%', // to enable resizing for IE
+		fontFamily: 'inherit',
+		fontSize: 'inherit',
+		fontWeight: 'inherit',
+		margin: 0,
+		padding: 0,
+	},
 };
 
 
@@ -19,15 +28,12 @@ function init() {
 }
 
 
-function setValue(vnode, v) {
-	console.log(vnode, v);
+function oninput(vnode, v) {
 	vnode.state.value = v;
-	vnode.attrs.value = v;
-}
 
-
-function oninput(vnode) {
-
+	if (vnode.attrs.oninput) {
+		vnode.attrs.oninput(vnode.state.value);
+	}
 }
 
 
@@ -42,7 +48,7 @@ function view(vnode) {
 
 	return m(className, [
 		m('input', {
-			oninput: m.withAttr('value', setValue.bind(null, vnode)),
+			oninput: m.withAttr('value', oninput.bind(null, vnode)),
 			value: vnode.state.value,
 		}),
 	]);
