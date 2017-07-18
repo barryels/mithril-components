@@ -22,12 +22,12 @@ var css = {
 		textDecoration: 'none',
 
 		'&:hover': {
-			background: '#555',
+			background: '#000',
 			color: '#fff',
 		},
 
 		'&--active': {
-			background: '#555',
+			background: '#000',
 			color: '#fff',
 		},
 	},
