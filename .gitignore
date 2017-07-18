@@ -6,6 +6,8 @@
 
 *.iml
 
+.Rhistory
+
 node_modules
 
 npm-debug.log*
