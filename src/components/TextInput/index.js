@@ -7,6 +7,14 @@ var CSSManager = require('./../utils').CSSManager;
 
 var name = 'TextInput';
 var className = '.' + CSSManager.uniqueDOMClassAttribute(name);
+var types = {
+	default: {
+		tagName: 'input',
+	},
+	multiline: {
+		tagName: 'textarea',
+	},
+};
 
 
 var css = {
@@ -16,7 +24,7 @@ var css = {
 		padding: 0,
 	},
 
-	' input': {
+	' input, textarea': {
 		border: '0',
 		boxSizing: 'border-box',
 		'*font-size': '100%', // to enable resizing for IE
@@ -41,13 +49,13 @@ var theme = {
 	},
 	input: function (style) {
 		CSSManager.updateComponentHeadStyle(className, {
-			' input': style,
+			' input, textarea': style,
 		});
 	},
 	hasErrorsInput: function (style) {
 		CSSManager.updateComponentHeadStyle(className, {
 			'&--has-errors': {
-				' input': style,
+				' input, textarea': style,
 			},
 		});
 	},
@@ -81,6 +89,7 @@ function oninit(vnode) {
 
 
 function view(vnode) {
+	var type = vnode.attrs.type || types.default;
 	var id = vnode.attrs.id || CSSManager.uniqueDOMidAttribute(name);
 	var errors = vnode.attrs.errors || [];
 	var _className = className;
@@ -94,7 +103,7 @@ function view(vnode) {
 		m('label', {
 			for: id,
 		}, 'Label'),
-		m('input', {
+		m(type.tagName, {
 			id: id,
 			oninput: m.withAttr('value', oninput.bind(null, vnode)),
 			value: vnode.state.value,
@@ -108,6 +117,7 @@ init();
 
 module.exports = {
 	theme: theme,
+	types: types,
 	oninit: oninit,
 	view: view,
 };

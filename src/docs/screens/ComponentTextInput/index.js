@@ -27,6 +27,7 @@ function view() {
 				{ label: 'Has one error' },
 			],
 		}),
+		m(TextInput, { type: TextInput.types.multiline, value: value, oninput: updateValue.bind(null) }),
 		m('pre', JSON.stringify(value, '', 2)),
 	]);
 }
