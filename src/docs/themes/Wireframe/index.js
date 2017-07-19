@@ -91,7 +91,7 @@ function initComponentStyling() {
 		padding: (config.base_unit * 2) + 'px',
 	});
 	List.theme.itemFirst({
-		background: '#000',
+		// background: '#000',
 	});
 	List.theme.itemLast({
 		borderBottom: '0',

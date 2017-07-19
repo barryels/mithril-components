@@ -67,7 +67,9 @@ var theme = {
 
 
 function onclick(vnode, item, e) {
-	console.log(name + '.onclick()', item.href, item.hash, e);
+	if (vnode.attrs.onclick) {
+		vnode.attrs.onclick(item, e);
+	}
 
 	if (item.disabled) {
 		return;
@@ -81,10 +83,6 @@ function onclick(vnode, item, e) {
 	if (item.hash) {
 		m.route.set(item.hash);
 		return;
-	}
-
-	if (vnode.attrs.onclick) {
-		vnode.attrs.onclick(item, e);
 	}
 
 	return;

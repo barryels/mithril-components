@@ -7,6 +7,7 @@ require('./themes/Wireframe').init();
 
 
 function init() {
+	m.route.mode = 'hash';
 	m.route(document.getElementById('app'), '/', buildRoutes());
 }
 

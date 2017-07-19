@@ -6,10 +6,13 @@ var domainCommands = require('./../../domain').command;
 var domainQuery = require('./../../domain').query;
 var CSSManager = require('./../../../components/utils').CSSManager;
 var List = require('./../../../components/List');
+var TextInput = require('./../../../components/TextInput');
 
 
 var name = 'docs_MainNavigation';
 var className = '.' + name;
+var routesList = [];
+var routesListFiltered = [];
 
 
 function construct() {
@@ -48,11 +51,56 @@ function construct() {
 
 function onWindowHashChange() {
 	console.warn('onWindowHashChange()', window.location);
+}
+
+
+function onSearchFieldInput(value) {
+	filterItems(value);
+}
+
+function filterItems(searchText) {
+	if (!searchText) {
+		routesListFiltered = routesList;
+		return;
+	}
+
+	routesListFiltered = routesList.filter(function (routeListItem) {
+		if (routeListItem.label.toLowerCase().indexOf(searchText.toLowerCase()) > -1) {
+			return routeListItem;
+		}
+	});
+}
+
+
+function onItemClick() {
 	domainCommands.hideMainNavigation();
 }
 
 
+function buildItemList() {
+	var routesObject = domainQuery.routes(),
+		routePropName = '',
+		route = null;
+
+	for (routePropName in routesObject) {
+		route = routesObject[routePropName];
+
+		if (typeof route.showInNav === 'undefined') {
+			routesList.push({ route: routePropName, title: route.name });
+		}
+	}
+
+	routesList = routesList.map(function (routeListItem) {
+		return { label: routeListItem.title, hash: routeListItem.route };
+	});
+
+	routesListFiltered = routesList;
+}
+
+
 function oninit() {
+	buildItemList();
+
 	window.addEventListener('hashchange', onWindowHashChange);
 	onWindowHashChange();
 }
@@ -65,33 +113,21 @@ function onbeforeremove() {
 
 function view() {
 	var style = {},
-		routesObject = domainQuery.routes(),
-		routePropName = '',
-		routesList = [],
-		route = null,
 		classNameModifier = className;
 
 	if (domainQuery.isMainNavigationShowing()) {
 		classNameModifier += '--showing';
 	}
 
-	for (routePropName in routesObject) {
-		route = routesObject[routePropName];
-
-		if (typeof route.showInNav === 'undefined') {
-			routesList.push({ route: routePropName, title: route.name });
-		}
-	}
-
 	return m(className + classNameModifier, { style: style }, [
 		m(className + '__header', [
 			m('button', { onclick: domainCommands.toggleMainNavigationDisplay.bind(null) }, 'X'),
+			m(TextInput, { oninput: onSearchFieldInput.bind(null), placeholder: 'Search...' }),
 		]),
 		m(className + '__section', [
 			m(List, {
-				items: routesList.map(function (routeListItem) {
-					return { label: routeListItem.title, hash: '#!' + routeListItem.route };
-				}),
+				items: routesListFiltered,
+				onclick: onItemClick.bind(null),
 			}),
 		]),
 		m(className + '__footer', [

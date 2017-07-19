@@ -39,7 +39,7 @@ function view() {
 		m(TextInput, {
 			value: state.value,
 			oninput: updateValue.bind(null),
-			errors: state.errors1,
+			errors: state.errorsA,
 		}),
 
 		m(TextInput, { type: TextInput.types.multiline, value: state.value, oninput: updateValue.bind(null) }),
@@ -47,7 +47,7 @@ function view() {
 		m(TextInput, {
 			value: state.value,
 			type: TextInput.types.multiline,
-			errors: state.errors2,
+			errors: state.errorsB,
 		}),
 		m('pre', JSON.stringify(state.value, '', 2)),
 	]);

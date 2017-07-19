@@ -115,6 +115,7 @@ function oninit(vnode) {
 
 function view(vnode) {
 	var type = vnode.attrs.type || types.default;
+	var placeholder = vnode.attrs.placeholder || '';
 	var id = vnode.attrs.id || CSSManager.uniqueDOMidAttribute(name);
 	var errors = vnode.attrs.errors || [];
 	var _className = className;
@@ -130,6 +131,7 @@ function view(vnode) {
 		}, 'Label'),
 		m(type.tagName + className + '__input', {
 			id: id,
+			placeholder: placeholder,
 			oninput: m.withAttr('value', oninput.bind(null, vnode)),
 			value: vnode.state.value,
 		}),

@@ -8,6 +8,7 @@ var state;
 console.log(mobx);
 
 function toggleMainNavigationDisplay() {
+	console.log('toggleMainNavigationDisplay()');
 	if (state.isMainNavigationShowing) {
 		hideMainNavigation();
 	} else {
@@ -17,11 +18,13 @@ function toggleMainNavigationDisplay() {
 
 
 function showMainNavigation() {
+	console.log('showMainNavigation()');
 	state.isMainNavigationShowing = true;
 };
 
 
 function hideMainNavigation() {
+	console.log('hideMainNavigation()');
 	state.isMainNavigationShowing = false;
 };
 
