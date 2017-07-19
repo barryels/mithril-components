@@ -7,18 +7,20 @@ var CSSManager = require('./../utils').CSSManager;
 
 var name = 'Button';
 var className = '.' + CSSManager.uniqueDOMClassAttribute(name);
-var types = {
-	default: {
-		role: 'button',
-		type: 'button',
-	},
-	submit: {
-		role: 'button',
-		type: 'submit',
-	},
-	reset: {
-		role: 'button',
-		type: 'reset',
+var attributes = {
+	type: {
+		default: {
+			role: 'button',
+			type: 'button',
+		},
+		submit: {
+			role: 'button',
+			type: 'submit',
+		},
+		reset: {
+			role: 'button',
+			type: 'reset',
+		},
 	},
 };
 var components = {
@@ -51,6 +53,10 @@ var css = {
 		padding: 0,
 	},
 
+	'&:hover': {
+		color: 'inherit',
+	},
+
 	'&:disabled': {
 		cursor: 'not-allowed',
 	},
@@ -69,6 +75,16 @@ var theme = {
 			'&:disabled': style,
 		});
 	},
+	variationDefault: function (style) {
+		CSSManager.updateComponentHeadStyle(className, {
+			'&--default': style,
+		});
+	},
+	variationCustom: function (modifierName, style) {
+		var _css = {};
+		_css['&' + modifierName] = style;
+		CSSManager.updateComponentHeadStyle(className, _css);
+	},
 };
 
 
@@ -82,23 +98,27 @@ function getLabel(vnode) {
 
 
 function view(vnode) {
-	var type = vnode.attrs.type || types.default,
+	var type = vnode.attrs.type || attributes.type.default,
 		style = vnode.attrs.style || {},
-		onclick = vnode.attrs.onclick ? vnode.attrs.onclick : null;
+		onclick = vnode.attrs.onclick ? vnode.attrs.onclick : null,
+		label = getLabel(vnode),
+		classNameModifier = vnode.attrs.variation ? className + vnode.attrs.variation : '';
 
-	return m('button' + className, {
+	// console.log(label, vnode.attrs, classNameModifier);
+
+	return m('button' + className + classNameModifier, {
 		type: type.type,
 		style: style,
 		onclick: onclick,
 		role: type.role,
 		disabled: vnode.attrs.disabled,
-	}, getLabel(vnode));
+	}, label);
 }
 
 
 module.exports = {
 	components: components,
 	theme: theme,
-	types: types,
+	attributes: attributes,
 	view: view,
 };

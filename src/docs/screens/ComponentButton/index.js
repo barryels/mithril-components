@@ -8,11 +8,22 @@ var Button = require('./../../../components/Button');
 
 
 var state = {
-	customStyling1: {},
-};
+	customStyling1: {
+		background: '#0f0',
+		border: '10px solid #00f',
+		boxShadow: 'none',
+		fontSize: '24px',
+		fontStyle: 'italic',
+		textAlign: 'right',
+		textTransform: 'uppercase',
 
-state.customStyling1[Button.components.disabled] = {
-	background: '#f00',
+		'&:disabled': {
+			background: '#f00',
+		},
+	},
+	customStyling2: {
+
+	},
 };
 
 
@@ -30,26 +41,26 @@ function view() {
 
 		m(Button, { onclick: window.alert.bind(null, 'Button clicked!') }, 'onClick'),
 
-		m(Button, { type: Button.types.submit }, 'type=submit'),
+		m(Button, { type: Button.attributes.type.submit }, 'type=submit'),
 
-		m(Button, { type: Button.types.reset }, 'type=reset'),
-
-		m(Button, {
-			style: {
-				background: '#0f0',
-				border: '10px solid #00f',
-				boxShadow: 'none',
-				fontSize: '24px',
-				fontStyle: 'italic',
-				textAlign: 'right',
-				textTransform: 'uppercase',
-			},
-		}, 'Custom styling 1'),
+		m(Button, { type: Button.attributes.type.reset }, 'type=reset'),
 
 		m(Button, {
 			style: state.customStyling1,
+		}, 'Custom styling 1'),
+
+		m(Button, {
+			style: state.customStyling2,
 			disabled: true,
 		}, 'Custom styling 2 (Disabled)'),
+
+		m('h2', 'Styles'),
+		m(Button, { variation: '--variation-1' }, 'Variation 1'),
+		m(Button, { variation: '--variation-1', disabled: true }, 'Variation 1 (disabled)'),
+		m(Button, { variation: '--variation-2' }, 'Variation 2'),
+		m(Button, { variation: '--variation-2', disabled: true }, 'Variation 2 (disabled)'),
+		m(Button, { variation: '--variation-3' }, 'Variation 3'),
+		m(Button, { variation: '--variation-3', disabled: true }, 'Variation 3 (disabled)'),
 	]);
 }
 

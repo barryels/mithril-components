@@ -43,11 +43,15 @@ function initComponentStyling() {
 
 
 	Button.theme.base({
-		background: '#fff',
-		border: '1px solid #ccc',
-		boxShadow: '0 2px 0 2px rgba(0,0,0,0.75)',
 		marginBottom: config.base_unit + 'px',
 		padding: config.base_unit + 'px',
+		background: '#fff',
+		border: '1px solid #000',
+
+		'&:disabled': {
+			background: '#eee',
+			color: '#ccc',
+		},
 
 		'&:hover': {
 			background: '#ccc',
@@ -55,9 +59,52 @@ function initComponentStyling() {
 		},
 	});
 
-	Button.theme.disabled({
-		background: '#eee',
-		color: '#ccc',
+	Button.theme.variationCustom('--variation-1', {
+		background: '#00c',
+		borderColor: '#009',
+		color: '#fff',
+
+		'&:hover': {
+			background: '#00e',
+			color: '#fff',
+		},
+
+		'&:disabled': {
+			background: '#009',
+			color: '#00c',
+		},
+	});
+
+	Button.theme.variationCustom('--variation-2', {
+		background: '#0c0',
+		borderColor: '#090',
+		color: '#fff',
+
+		'&:hover': {
+			background: '#0e0',
+			color: '#fff',
+		},
+
+		'&:disabled': {
+			background: '#090',
+			color: '#0c0',
+		},
+	});
+
+	Button.theme.variationCustom('--variation-3', {
+		background: '#c00',
+		borderColor: '#900',
+		color: '#fff',
+
+		'&:hover': {
+			background: '#e00',
+			color: '#fff',
+		},
+
+		'&:disabled': {
+			background: '#900',
+			color: '#c00',
+		},
 	});
 
 
