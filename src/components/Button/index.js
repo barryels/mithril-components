@@ -75,11 +75,6 @@ var theme = {
 			'&:disabled': style,
 		});
 	},
-	variationDefault: function (style) {
-		CSSManager.updateComponentHeadStyle(className, {
-			'&--default': style,
-		});
-	},
 	variationCustom: function (modifierName, style) {
 		var _css = {};
 		_css['&' + modifierName] = style;
