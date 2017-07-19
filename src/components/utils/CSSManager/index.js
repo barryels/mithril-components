@@ -101,6 +101,13 @@ function uniqueDOMidAttribute(name) {
 }
 
 
+function createComponentStyleVariation(className, modifierName, style) {
+	var _css = {};
+	_css['&' + modifierName] = style;
+	updateComponentHeadStyle(className, _css);
+}
+
+
 module.exports = {
 	name: name,
 	uniqueDOMClassAttribute: uniqueDOMClassAttribute,
@@ -110,4 +117,6 @@ module.exports = {
 	addGlobalHeadStyle: addGlobalHeadStyle,
 	addComponentHeadStyle: addComponentHeadStyle,
 	updateComponentHeadStyle: updateComponentHeadStyle,
+	componentStyleVariationModifierNamePrefix: '--',
+	createComponentStyleVariation: createComponentStyleVariation,
 };

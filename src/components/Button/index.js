@@ -75,10 +75,8 @@ var theme = {
 			'&:disabled': style,
 		});
 	},
-	variationCustom: function (modifierName, style) {
-		var _css = {};
-		_css['&' + modifierName] = style;
-		CSSManager.updateComponentHeadStyle(className, _css);
+	createVariation: function (modifierName, style) {
+		CSSManager.createComponentStyleVariation(className, CSSManager.componentStyleVariationModifierNamePrefix + modifierName, style);
 	},
 };
 
@@ -97,9 +95,7 @@ function view(vnode) {
 		style = vnode.attrs.style || {},
 		onclick = vnode.attrs.onclick ? vnode.attrs.onclick : null,
 		label = getLabel(vnode),
-		classNameModifier = vnode.attrs.variation ? className + vnode.attrs.variation : '';
-
-	// console.log(label, vnode.attrs, classNameModifier);
+		classNameModifier = vnode.attrs.variation ? className + CSSManager.componentStyleVariationModifierNamePrefix + vnode.attrs.variation : '';
 
 	return m('button' + className + classNameModifier, {
 		type: type.type,

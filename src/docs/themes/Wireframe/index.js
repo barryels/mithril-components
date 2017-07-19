@@ -59,7 +59,7 @@ function initComponentStyling() {
 		},
 	});
 
-	Button.theme.variationCustom('--variation-1', {
+	Button.theme.createVariation('variation-1', {
 		background: '#00c',
 		borderColor: '#009',
 		color: '#fff',
@@ -75,7 +75,7 @@ function initComponentStyling() {
 		},
 	});
 
-	Button.theme.variationCustom('--variation-2', {
+	Button.theme.createVariation('variation-2', {
 		background: '#0c0',
 		borderColor: '#090',
 		color: '#fff',
@@ -91,7 +91,7 @@ function initComponentStyling() {
 		},
 	});
 
-	Button.theme.variationCustom('--variation-3', {
+	Button.theme.createVariation('variation-3', {
 		background: '#c00',
 		borderColor: '#900',
 		color: '#fff',

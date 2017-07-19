@@ -55,12 +55,12 @@ function view() {
 		}, 'Custom styling 2 (Disabled)'),
 
 		m('h2', 'Styles'),
-		m(Button, { variation: '--variation-1' }, 'Variation 1'),
-		m(Button, { variation: '--variation-1', disabled: true }, 'Variation 1 (disabled)'),
-		m(Button, { variation: '--variation-2' }, 'Variation 2'),
-		m(Button, { variation: '--variation-2', disabled: true }, 'Variation 2 (disabled)'),
-		m(Button, { variation: '--variation-3' }, 'Variation 3'),
-		m(Button, { variation: '--variation-3', disabled: true }, 'Variation 3 (disabled)'),
+		m(Button, { variation: 'variation-1' }, 'Variation 1'),
+		m(Button, { variation: 'variation-1', disabled: true }, 'Variation 1 (disabled)'),
+		m(Button, { variation: 'variation-2' }, 'Variation 2'),
+		m(Button, { variation: 'variation-2', disabled: true }, 'Variation 2 (disabled)'),
+		m(Button, { variation: 'variation-3' }, 'Variation 3'),
+		m(Button, { variation: 'variation-3', disabled: true }, 'Variation 3 (disabled)'),
 	]);
 }
 
