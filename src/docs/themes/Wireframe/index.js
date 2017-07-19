@@ -130,6 +130,11 @@ function initComponentStyling() {
 	TextInput.theme.errorMessages({
 		color: '#c00',
 	});
+	TextInput.theme.createVariation('variation-1', {
+		' input': {
+			border: '1px dashed #900',
+		},
+	});
 
 
 	List.theme.item({

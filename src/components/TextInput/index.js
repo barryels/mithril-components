@@ -84,6 +84,9 @@ var theme = {
 			'&--has-errors': _style,
 		});
 	},
+	createVariation: function (modifierName, style) {
+		CSSManager.createComponentStyleVariation(className, CSSManager.componentStyleVariationModifierNamePrefix + modifierName, style);
+	},
 };
 
 
@@ -145,11 +148,16 @@ function onupdate(vnode) {
 
 
 function view(vnode) {
-	var type = vnode.attrs.type || types.default;
-	var placeholder = vnode.attrs.placeholder || '';
-	var tabindex = vnode.attrs.tabindex || 0;
-	var errors = vnode.attrs.errors || [];
-	var _className = className;
+	var type = vnode.attrs.type || types.default,
+		placeholder = vnode.attrs.placeholder || '',
+		tabindex = vnode.attrs.tabindex || 0,
+		errors = vnode.attrs.errors || [],
+		rows = vnode.attrs.rows || 1,
+		_className = className,
+		label = vnode.attrs.label || '',
+		classNameVariationModifier = vnode.attrs.variation ? className + CSSManager.componentStyleVariationModifierNamePrefix + vnode.attrs.variation : '';
+
+	_className += classNameVariationModifier;
 
 	if (errors.length > 0) {
 		_className += className + '--has-errors';
@@ -159,10 +167,11 @@ function view(vnode) {
 	return m(_className, [
 		m('label' + className + '__label', {
 			for: vnode.state.id,
-		}, 'Label'),
+		}, label),
 		m(type.tagName + className + '__input', {
 			id: vnode.state.id,
 			placeholder: placeholder,
+			rows: rows,
 			tabindex: tabindex,
 			onfocus: onfocus.bind(null, vnode),
 			oninput: m.withAttr('value', oninput.bind(null, vnode)),
