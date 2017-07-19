@@ -25,6 +25,7 @@ var css = {
 
 	'&__item': {
 		boxSizing: 'border-box',
+		cursor: 'pointer',
 		margin: 0,
 		overflow: 'hidden',
 		padding: 0,
