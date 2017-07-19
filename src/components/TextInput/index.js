@@ -57,7 +57,7 @@ var theme = {
 	},
 	input: function (style) {
 		CSSManager.updateComponentHeadStyle(className, {
-			'&__input, &__textarea': style,
+			'&__input': style,
 		});
 	},
 	hasErrorsLabel: function (style) {
@@ -70,7 +70,7 @@ var theme = {
 	},
 	hasErrorsInput: function (style) {
 		var _style = {};
-		_style[' ' + className + '__input, ' + className + '__textarea'] = style;
+		_style[' ' + className + '__input'] = style;
 
 		CSSManager.updateComponentHeadStyle(className, {
 			'&--has-errors': _style,
@@ -106,10 +106,29 @@ function oninput(vnode, v) {
 }
 
 
+function onfocus(vnode) {
+	vnode.state.hasBeenFocussed = true;
+}
+
+
 function oninit(vnode) {
 	vnode.state = {
+		hasBeenFocussed: false,
 		value: typeof vnode.attrs.value !== 'undefined' ? vnode.attrs.value : '',
 	};
+}
+
+
+function onupdate(vnode) {
+	var inputField;
+
+	if (vnode.attrs.shouldFocus === true && vnode.state.hasBeenFocussed === false) {
+		inputField = vnode.dom.getElementsByClassName(className.split('.').join('') + '__input')[0];
+
+		setTimeout(function () {
+			inputField.focus();
+		}, 0);
+	}
 }
 
 
@@ -132,6 +151,7 @@ function view(vnode) {
 		m(type.tagName + className + '__input', {
 			id: id,
 			placeholder: placeholder,
+			onfocus: onfocus.bind(null, vnode),
 			oninput: m.withAttr('value', oninput.bind(null, vnode)),
 			value: vnode.state.value,
 		}),
@@ -149,5 +169,6 @@ module.exports = {
 	theme: theme,
 	types: types,
 	oninit: oninit,
+	onupdate: onupdate,
 	view: view,
 };

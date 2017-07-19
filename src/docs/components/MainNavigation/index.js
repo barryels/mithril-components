@@ -98,7 +98,11 @@ function buildItemList() {
 }
 
 
-function oninit() {
+function oninit(vnode) {
+	vnode.state = {
+		isShowing: domainQuery.isMainNavigationShowing(),
+	};
+
 	buildItemList();
 
 	window.addEventListener('hashchange', onWindowHashChange);
@@ -111,7 +115,7 @@ function onbeforeremove() {
 }
 
 
-function view() {
+function view(vnode) {
 	var style = {},
 		classNameModifier = className;
 
@@ -119,10 +123,12 @@ function view() {
 		classNameModifier += '--showing';
 	}
 
+	vnode.state.isShowing = domainQuery.isMainNavigationShowing();
+
 	return m(className + classNameModifier, { style: style }, [
 		m(className + '__header', [
 			m('button', { onclick: domainCommands.toggleMainNavigationDisplay.bind(null) }, 'X'),
-			m(TextInput, { oninput: onSearchFieldInput.bind(null), placeholder: 'Search...' }),
+			m(TextInput, { oninput: onSearchFieldInput.bind(null), placeholder: 'Search...', shouldFocus: true }),
 		]),
 		m(className + '__section', [
 			m(List, {
