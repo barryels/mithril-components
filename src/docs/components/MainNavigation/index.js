@@ -117,10 +117,12 @@ function onbeforeremove() {
 
 function view(vnode) {
 	var style = {},
-		classNameModifier = className;
+		classNameModifier = className,
+		shouldFocusSearchInput = false;
 
 	if (domainQuery.isMainNavigationShowing()) {
 		classNameModifier += '--showing';
+		shouldFocusSearchInput = true;
 	}
 
 	vnode.state.isShowing = domainQuery.isMainNavigationShowing();
@@ -128,7 +130,7 @@ function view(vnode) {
 	return m(className + classNameModifier, { style: style }, [
 		m(className + '__header', [
 			m('button', { onclick: domainCommands.toggleMainNavigationDisplay.bind(null) }, 'X'),
-			m(TextInput, { oninput: onSearchFieldInput.bind(null), placeholder: 'Search...', shouldFocus: true }),
+			m(TextInput, { oninput: onSearchFieldInput.bind(null), placeholder: 'Search...', shouldFocus: shouldFocusSearchInput }),
 		]),
 		m(className + '__section', [
 			m(List, {

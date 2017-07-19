@@ -111,31 +111,43 @@ function onfocus(vnode) {
 }
 
 
-function oninit(vnode) {
-	vnode.state = {
-		hasBeenFocussed: false,
-		value: typeof vnode.attrs.value !== 'undefined' ? vnode.attrs.value : '',
-	};
-}
-
-
-function onupdate(vnode) {
+function focusInput(vnode) {
 	var inputField;
 
-	if (vnode.attrs.shouldFocus === true && vnode.state.hasBeenFocussed === false) {
+	if (vnode.dom && vnode.attrs.shouldFocus === true && vnode.state.hasBeenFocussed === false) {
 		inputField = vnode.dom.getElementsByClassName(className.split('.').join('') + '__input')[0];
 
 		setTimeout(function () {
+			console.log('focussing', vnode.state.id);
 			inputField.focus();
 		}, 0);
 	}
 }
 
 
+function oninit(vnode) {
+	vnode.state = {
+		id: vnode.attrs.id || CSSManager.uniqueDOMidAttribute(name),
+		hasBeenFocussed: false,
+		value: typeof vnode.attrs.value !== 'undefined' ? vnode.attrs.value : '',
+	};
+}
+
+
+function oncreate(vnode) {
+	focusInput(vnode);
+}
+
+
+function onupdate(vnode) {
+	focusInput(vnode);
+}
+
+
 function view(vnode) {
 	var type = vnode.attrs.type || types.default;
 	var placeholder = vnode.attrs.placeholder || '';
-	var id = vnode.attrs.id || CSSManager.uniqueDOMidAttribute(name);
+	var tabindex = vnode.attrs.tabindex || 0;
 	var errors = vnode.attrs.errors || [];
 	var _className = className;
 
@@ -146,11 +158,12 @@ function view(vnode) {
 
 	return m(_className, [
 		m('label' + className + '__label', {
-			for: id,
+			for: vnode.state.id,
 		}, 'Label'),
 		m(type.tagName + className + '__input', {
-			id: id,
+			id: vnode.state.id,
 			placeholder: placeholder,
+			tabindex: tabindex,
 			onfocus: onfocus.bind(null, vnode),
 			oninput: m.withAttr('value', oninput.bind(null, vnode)),
 			value: vnode.state.value,
@@ -169,6 +182,7 @@ module.exports = {
 	theme: theme,
 	types: types,
 	oninit: oninit,
+	oncreate: oncreate,
 	onupdate: onupdate,
 	view: view,
 };
