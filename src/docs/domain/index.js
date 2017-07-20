@@ -18,7 +18,7 @@ var state = {
 		'/component/Dialog': { name: 'Dialog' },
 		'/component/Divider': { name: 'Divider' },
 		'/component/Grid': { name: 'Grid' },
-		'/component/GridList': { name: 'Grid' },
+		'/component/GridList': { name: 'GridList' },
 		'/component/Icon': { name: 'Icon' },
 		'/component/List': { name: 'List' },
 		'/component/Media': { name: 'Media' },

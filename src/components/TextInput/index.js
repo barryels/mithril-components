@@ -46,7 +46,24 @@ var css = {
 	},
 };
 
+var THEMEABLE = {
+	base: '',
+	label: '&__label',
+	input: '&__input',
+	errors: '&__errors',
+	has_errors: '&--has-errors',
+	has_errors_label: '&--has-errors &__label',
+	has_errors_input: '&--has-errors &__input',
+	has_errors_errors: '&--has-errors &__errors',
+	is_dirty: '', // TODO
+	has_content: '', // TODO
+	has_focus: '', // TODO
+};
+
 var theme = {
+	all: function(css) {
+		CSSManager.updateComponentHeadStyle(className, css);
+	},
 	base: function (style) {
 		CSSManager.updateComponentHeadStyle(className, style);
 	},
@@ -189,6 +206,7 @@ init();
 
 module.exports = {
 	theme: theme,
+	THEMEABLE: THEMEABLE,
 	types: types,
 	oninit: oninit,
 	oncreate: oncreate,

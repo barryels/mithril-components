@@ -54,7 +54,7 @@ function view() {
 			disabled: true,
 		}, 'Custom styling 2 (Disabled)'),
 
-		m('h2', 'Styles'),
+		m('h2', 'Variations'),
 		m(Button, { variation: 'variation-1' }, 'Variation 1'),
 		m(Button, { variation: 'variation-1', disabled: true }, 'Variation 1 (disabled)'),
 		m(Button, { variation: 'variation-2' }, 'Variation 2'),

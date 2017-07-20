@@ -41,6 +41,18 @@ function addHeadStyle(id, css, doUpdateExisting) {
 }
 
 
+function addHTMLLinkTag(href) {
+	var head = getHTMLHead();
+
+	var l = document.createElement('link');
+
+	l.setAttribute('rel', 'stylesheet');
+	l.setAttribute('href', href);
+
+	head.appendChild(l);
+}
+
+
 function doesHeadStyleExist(id) {
 	if (getHeadStyleById(id)) {
 		return true;
@@ -114,6 +126,7 @@ module.exports = {
 	uniqueDOMidAttribute: uniqueDOMidAttribute,
 	generateCSSFromJS: generateCSSFromJS,
 	addHeadStyle: addHeadStyle,
+	addHTMLLinkTag: addHTMLLinkTag,
 	addGlobalHeadStyle: addGlobalHeadStyle,
 	addComponentHeadStyle: addComponentHeadStyle,
 	updateComponentHeadStyle: updateComponentHeadStyle,

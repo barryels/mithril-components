@@ -3,7 +3,11 @@
 
 var m = require('mithril');
 var domain = require('./domain');
-require('./themes/Wireframe').init();
+
+
+// var theme = require('./themes/wireframe');
+var theme = require('./themes/twitter-bootstrap');
+theme.init();
 
 
 function init() {

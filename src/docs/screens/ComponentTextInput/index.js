@@ -24,7 +24,7 @@ var errors_sample2 = [
 	{ content: 'The supplied input is not valid (11)' },
 ];
 var state = {
-	value: 'asdf1234',
+	value: 'asdf',
 	errorsA: errors_sample1,
 	errorsB: errors_sample2,
 };
@@ -32,13 +32,13 @@ var state = {
 
 function onInputTextInputA(v) {
 	state.value = v;
-	state.errorsA = [];
 }
 
 
 function onInputTextInputB() {
 	var randomNumberOfErrors = Math.floor(Math.random() * errors_sample2.length);
 	state.errorsB = errors_sample2.slice(0, randomNumberOfErrors);
+	state.errorsB.fill({ content: 'Some random error message (' + randomNumberOfErrors + ')' });
 }
 
 

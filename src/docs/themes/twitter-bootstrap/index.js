@@ -4,10 +4,13 @@
 var CSSManager = require('./../../../components/utils').CSSManager;
 
 
-var name = 'ThemeWireframe';
+var TextInput = require('./../../../components/TextInput');
+
+
+var name = 'theme-bootstrap';
 var config = {
-	base_unit: 8,
-	base_font_size: 14,
+	base_unit: 10,
+	base_font_size: 16,
 };
 
 
@@ -18,11 +21,12 @@ function init() {
 
 
 function initGlobalStyling() {
+	CSSManager.addHTMLLinkTag('https://fonts.googleapis.com/css?family=Open+Sans');
 	CSSManager.addGlobalHeadStyle(name, {
 		'html, body': {
 			background: '#fff',
 			color: '#222',
-			fontFamily: 'Arial, sans-serif',
+			fontFamily: 'Open Sans, Arial, sans-serif',
 			fontSize: config.base_font_size + 'px',
 			margin: 0,
 		},
@@ -39,7 +43,6 @@ function initComponentStyling() {
 	var GridColumn = require('./../../../components/GridColumn');
 	var List = require('./../../../components/List');
 	var ProgressIndicator = require('./../../../components/ProgressIndicator');
-	var TextInput = require('./../../../components/TextInput');
 
 
 	Button.theme.base({
@@ -47,6 +50,7 @@ function initComponentStyling() {
 		padding: config.base_unit + 'px',
 		background: '#fff',
 		border: '1px solid #000',
+		borderRadius: config.base_unit / 2 + 'px',
 
 		'&:disabled': {
 			background: '#eee',
@@ -107,35 +111,7 @@ function initComponentStyling() {
 		},
 	});
 
-
-	TextInput.theme.base({
-		marginBottom: config.base_unit * 2 + 'px',
-	});
-	TextInput.theme.label({
-		display: 'block',
-		marginBottom: config.base_unit + 'px',
-	});
-	TextInput.theme.input({
-		borderBottom: '2px solid #ccc',
-		display: 'block',
-		marginBottom: config.base_unit + 'px',
-		padding: config.base_unit + 'px 0',
-	});
-	TextInput.theme.hasErrorsLabel({
-		color: '#c00',
-	});
-	TextInput.theme.hasErrorsInput({
-		borderBottomColor: '#c00',
-	});
-	TextInput.theme.errorMessages({
-		color: '#c00',
-	});
-	TextInput.theme.createVariation('variation-1', {
-		' input': {
-			border: '1px dashed #900',
-		},
-	});
-
+	TextInput.theme.all(getTextInputStyling());
 
 	List.theme.item({
 		background: '#ccc',
@@ -191,6 +167,55 @@ function initComponentStyling() {
 }
 
 
+function getTextInputStyling() {
+	var TextInputStyling = {};
+
+	TextInputStyling[TextInput.THEMEABLE.base] = {
+		marginBottom: config.base_unit * 2 + 'px',
+	};
+	TextInputStyling[TextInput.THEMEABLE.label] = {
+		display: 'block',
+		marginBottom: config.base_unit + 'px',
+	};
+	TextInputStyling[TextInput.THEMEABLE.input] = {
+		border: '1px solid #000',
+		display: 'block',
+		marginBottom: config.base_unit + 'px',
+	};
+
+	// TextInput.theme.base({
+	// 	marginBottom: config.base_unit * 2 + 'px',
+	// });
+	// TextInput.theme.label({
+	// 	display: 'block',
+	// 	marginBottom: config.base_unit + 'px',
+	// });
+	// TextInput.theme.input({
+	// 	borderBottom: '2px solid #ccc',
+	// 	display: 'block',
+	// 	marginBottom: config.base_unit + 'px',
+	// 	padding: config.base_unit + 'px 0',
+	// });
+	// TextInput.theme.hasErrorsLabel({
+	// 	color: '#c00',
+	// });
+	// TextInput.theme.hasErrorsInput({
+	// 	borderBottomColor: '#c00',
+	// });
+	// TextInput.theme.errorMessages({
+	// 	color: '#c00',
+	// });
+	// TextInput.theme.createVariation('variation-1', {
+	// 	' input': {
+	// 		border: '1px dashed #900',
+	// 	},
+	// });
+
+	return TextInputStyling;
+}
+
+
 module.exports = {
 	init: init,
+	config: config,
 };
