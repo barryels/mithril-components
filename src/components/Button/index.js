@@ -95,9 +95,12 @@ function view(vnode) {
 		style = vnode.attrs.style || {},
 		onclick = vnode.attrs.onclick ? vnode.attrs.onclick : null,
 		label = getLabel(vnode),
-		classNameModifier = vnode.attrs.variation ? className + CSSManager.componentStyleVariationModifierNamePrefix + vnode.attrs.variation : '';
+		classNameModifier = vnode.attrs.variation ? className + CSSManager.componentStyleVariationModifierNamePrefix + vnode.attrs.variation : '',
+		userClassName = vnode.attrs.className ? '.' + vnode.attrs.className.split(' ').join('.') : '';
 
-	return m('button' + className + classNameModifier, {
+	console.log(name, userClassName);
+
+	return m('button' + className + classNameModifier + userClassName, {
 		type: type.type,
 		style: style,
 		onclick: onclick,
