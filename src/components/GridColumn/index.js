@@ -18,8 +18,8 @@ var css = {
 	boxSizing: 'border-box',
 	position: 'relative',
 	minHeight: '1px',
-	paddingLeft: '15px',
-	paddingRight: '15px',
+	paddingLeft: '0px',
+	paddingRight: '0px',
 };
 
 
