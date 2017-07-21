@@ -9,4 +9,5 @@ module.exports = {
 	GridRow: require('./src/components/Button'),
 	ProgressIndicator: require('./src/components/ProgressIndicator'),
 	Tabs: require('./src/components/Tabs'),
+	utils: require('./src/components/Tabs'),
 };

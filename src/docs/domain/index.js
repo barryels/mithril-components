@@ -36,6 +36,7 @@ var state = {
 		'/component/TextInput': { name: 'TextInput' },
 		'/component/Tooltip': { name: 'Tooltip' },
 		'/component/Switch': { name: 'Switch' },
+		'/component/Utilities': { name: 'Utilities' },
 	},
 };
 
